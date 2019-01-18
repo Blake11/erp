@@ -5,9 +5,11 @@ MONGO_PORT = 27017
 
 MONGO_DBNAME = 'erp'
 
-RESOURCE_METHODS = ['GET']
+RESOURCE_METHODS = ['GET', "POST"]
 
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
+
+IF_MATCH = False
 
 RENDERERS = ['eve.render.JSONRenderer']
 
@@ -89,7 +91,7 @@ user = {
         'role': {
             'required': False,
             'type': 'string',
-            'allowed': ['client', 'admin'],
+            'allowed': ['client', 'admin', 'employee'],
             'default': 'client'
         }
 
@@ -111,7 +113,7 @@ product = {
             'type': 'string',
             'required': True,
             'minlength': 5,
-            'maxlength': 25,
+            'maxlength': 255,
         },
 
         'description': {
@@ -246,7 +248,54 @@ product_category = {
             'maxlength': 25,
         },
     }
+}
+providers = {
+    'item_title': 'providers',
 
+    'resource_methods': ['GET', 'POST'],
+
+    'schema': {
+        'name': {
+            'type': 'string'
+        },
+
+        'description': {
+            'type': 'string'
+        },
+
+        'image': {
+            'type': 'media'
+        }
+    }
+}
+stocks = {
+    'item_title': 'stocks',
+
+    'resource_methods': ['GET', 'POST'],
+
+    'schema': {
+        'product': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'product',
+                'field': '_id',
+                'embeddable': True
+            }
+        },
+
+        'quantity': {
+            'type': 'integer'
+        },
+
+        'provider': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'providers',
+                'field': '_id',
+                'embeddable': True
+            }
+        },
+    }
 }
 
 DOMAIN = {
@@ -254,5 +303,7 @@ DOMAIN = {
     'product': product,
     'shopping_cart': shopping_cart,
     'receipt': receipt,
-    'product_category': product_category
+    'product_category': product_category,
+    'providers': providers,
+    'stocks': stocks
 }

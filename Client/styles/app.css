@@ -1,0 +1,30 @@
+.navbar {
+    background-color: #2980b9 !important;
+}
+.nav-link, .navbar-brand {
+    color: white !important;
+
+}
+
+.sidebar {
+    height: 100%;
+    border-right: 1px dotted black;
+}
+
+.categorii {
+    color: black;
+}
+
+.categorie {
+    color: black;
+}
+
+.categorie:hover {
+    color: black;
+    font-size: 110%;
+    text-decoration: none;
+}
+
+.produse {
+    margin-bottom: 10%;
+}
